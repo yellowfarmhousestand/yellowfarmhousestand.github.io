@@ -1404,7 +1404,7 @@ h1, h2, h3, h4, h5, h6 {
     3. Click "New Form" and create a new form
     4. Copy the Form ID (it looks like: mblrwxyz)
     5. In this HTML file, find the line that says:
-       <form id="formspree-form" action="https://formspree.io/f/mblpnapy" method="POST" style="display: none;">
+       <form id="formspree-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="display: none;">
     6. Replace YOUR_FORM_ID with your actual form ID
     7. Save the file
     8. Test by submitting an order - you should receive an email!
@@ -1801,6 +1801,15 @@ h1, h2, h3, h4, h5, h6 {
         function addToCart(productId, item) {
             const quantityInput = document.getElementById(`${productId}-quantity`);
             const quantity = parseInt(quantityInput.value) || 1;
+
+            // 🔴 STRICT DIETARY MINIMUM - ALL SPECIAL ORDERS MUST BE 6+ QUANTITY
+            const dietarySelect = document.getElementById(`${productId}-dietary`);
+            if (dietarySelect && dietarySelect.value && dietarySelect.value !== '' && dietarySelect.value !== 'regular') {
+                if (quantity < 6) {
+                    alert('⚠️ DIETARY CUSTOM ORDERS - MINIMUM 6 REQUIRED\n\nWe require a MINIMUM of 6 items for all custom dietary orders (gluten-free, sugar-free, etc).\n\nPlease select: Half Dozen (6) or Dozen (12)\n\nThank you for understanding!');
+                    return; // STOP - Do not add to cart
+                }
+            }
 
             let selectedFlavor = '';
             const flavorSelect = document.getElementById(`${productId}-flavor`);
@@ -2890,6 +2899,50 @@ ${currentOrderData.email ? 'Email: ' + currentOrderData.email : ''}
 
         // Initialize
         renderProducts();
-    </script>
+    
+
+// Disable Single size option when dietary is selected
+function updateSizeOptions(productId) {
+    const dietarySelect = document.getElementById(`${productId}-dietary`);
+    const sizeSelect = document.getElementById(`${productId}-size`);
+
+    if (!sizeSelect || !dietarySelect) return;
+
+    const dietary = dietarySelect.value;
+    const singleOption = sizeSelect.querySelector('option[value="Single"]');
+
+    if (dietary && dietary !== '' && dietary !== 'regular') {
+        // Disable Single size for custom dietary
+        if (singleOption) {
+            singleOption.disabled = true;
+            singleOption.textContent = 'Single (Not available for custom dietary)';
+        }
+        // Auto-select Half Dozen
+        if (sizeSelect.value === 'Single') {
+            sizeSelect.value = 'Half Dozen';
+        }
+    } else {
+        // Re-enable Single
+        if (singleOption) {
+            singleOption.disabled = false;
+            singleOption.textContent = 'Single';
+        }
+    }
+}
+
+
+
+// Attach dietary change handlers to all products
+document.addEventListener('DOMContentLoaded', function() {
+    const allDietarySelects = document.querySelectorAll('select[id*="-dietary"]');
+    allDietarySelects.forEach(select => {
+        select.addEventListener('change', function() {
+            const productId = this.id.replace('-dietary', '');
+            updateSizeOptions(productId);
+        });
+    });
+});
+
+</script>
 </body>
 </html>
