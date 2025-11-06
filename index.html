@@ -990,10 +990,38 @@ h1, h2, h3, h4, h5, h6 {
 .btn-confirm:active {
   transform: scale(0.98);
 }
+
+            /* Instagram Button Styles */
+    .btn-follow-instagram {
+        display: inline-block;
+        padding: var(--space-12);
+        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        color: var(--color-white);
+        border: none;
+        border-radius: var(--radius-base);
+        font-size: var(--font-size-base);
+        font-weight: var(--font-weight-bold);
+        cursor: pointer;
+        transition: all var(--duration-fast) var(--ease-standard);
+        font-family: var(--font-family-heading);
+        text-decoration: none;
+        width: 100%;
+        max-width: 300px;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .btn-follow-instagram:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(188, 24, 136, 0.4);
+    }
+
+    .instagram-link {
+        text-decoration: none;
+        display: block;
+        text-align: center;
+    }
     </style>
-    <!-- Facebook SDK for Page Plugin -->
-    <div id="fb-root"></div>
-    <script crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"></script>
 </head>
 <body>
     <header class="header">
@@ -1011,26 +1039,15 @@ h1, h2, h3, h4, h5, h6 {
     </header>
 
     <div class="container">
-        <!-- Facebook Feed Section -->
-        <section class="facebook-feed-section">
-            <h2 class="feed-section-title">Follow Our Latest Updates</h2>
-            <div class="facebook-feed-container">
-                <div class="fb-page" 
-                     data-href="https://www.facebook.com/YellowFarmhouseGirl/" 
-                     data-tabs="timeline" 
-                     data-width="" 
-                     data-height="550" 
-                     data-small-header="true" 
-                     data-adapt-container-width="true" 
-                     data-hide-cover="false" 
-                     data-show-facepile="false">
-                    <blockquote cite="https://www.facebook.com/YellowFarmhouseGirl/" class="fb-xfbml-parse-ignore">
-                        <a href="https://www.facebook.com/YellowFarmhouseGirl/">Yellow Farmhouse Girl on Facebook</a>
-                    </blockquote>
-                </div>
-            </div>
+        <!-- Instagram Feed Section -->
+        <section class="instagram-feed-section">
+            <h2 class="feed-section-title">Follow Us on Instagram</h2>
+            <div class="instagram-feed-container">
+                <a href="https://www.instagram.com/yellowfarmhousestand/" target="_blank" rel="noopener noreferrer" class="instagram-link">
+                    <p style="text-align: center; font-size: 16px; margin: 20px 0;">🌻 Visit our Instagram @yellowfarmhousestand for daily updates and behind-the-scenes content!</p>
+                    <button class="btn-follow-instagram">Follow Us on Instagram</button>
+                </a>            </div>
         </section>
-
         <div id="shopping-view">
             <div class="dietary-note">
                 <strong>*</strong> = Gluten Free option &nbsp;&nbsp;&nbsp; <strong>^</strong> = Sugar Free option
