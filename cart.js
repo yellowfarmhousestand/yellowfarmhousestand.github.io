@@ -81,6 +81,11 @@ function addToCart(index) {
   }
 
   showSuccess(`Added ${qty}x ${item.name} to order!`);
+  
+  // Animate cart icon on add
+  if (typeof animateCartIcon === "function") {
+    animateCartIcon();
+  }
 }
 
 function updateCart() {

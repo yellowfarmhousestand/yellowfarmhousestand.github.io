@@ -182,6 +182,7 @@
       // Update cart badge count (call this from cart.js)
       function updateCartBadge() {
         const badge = document.getElementById("cartBadge");
+        const cartIcon = document.querySelector(".cart-icon");
         const cart = globalThis.cart || [];
         if (badge) {
           const itemCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
@@ -192,6 +193,22 @@
           } else {
             badge.style.display = "none";
           }
+        }
+      }
+
+      // Animate cart icon when item added
+      function animateCartIcon() {
+        const cartIcon = document.querySelector(".cart-icon");
+        const badge = document.getElementById("cartBadge");
+        
+        if (cartIcon) {
+          cartIcon.classList.add("pulse");
+          setTimeout(() => cartIcon.classList.remove("pulse"), 600);
+        }
+        
+        if (badge) {
+          badge.classList.add("bounce");
+          setTimeout(() => badge.classList.remove("bounce"), 600);
         }
       }
 
