@@ -163,7 +163,12 @@
         if (badge) {
           const itemCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
           badge.textContent = itemCount;
-          badge.style.display = itemCount > 0 ? 'flex' : 'none';
+          if (itemCount > 0) {
+            badge.style.display = 'flex';
+            badge.style.visibility = 'visible';
+          } else {
+            badge.style.display = 'none';
+          }
         }
       }
 

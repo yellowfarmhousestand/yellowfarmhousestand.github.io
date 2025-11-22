@@ -283,6 +283,10 @@
                 <button type="reset" class="btn btn-reset" onclick="resetFormComplete()">🔄 Clear Form</button>
             </div>
         </form>
+
+        <!-- Alerts -->
+        <div class="alert alert-success" id="successAlert"></div>
+        <div class="alert alert-error" id="errorAlert"></div>
     </div>
 
     <script src="cart.min.js"></script>
@@ -300,8 +304,14 @@
         const badge = document.getElementById('cartBadge');
         const cart = globalThis.cart || [];
         if (badge) {
-          badge.textContent = cart.length;
-          badge.style.display = cart.length > 0 ? 'flex' : 'none';
+          const itemCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+          badge.textContent = itemCount;
+          if (itemCount > 0) {
+            badge.style.display = 'flex';
+            badge.style.visibility = 'visible';
+          } else {
+            badge.style.display = 'none';
+          }
         }
       }
 

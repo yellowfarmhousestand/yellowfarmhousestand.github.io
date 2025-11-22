@@ -15,6 +15,7 @@ function loadCart() {
   const saved = localStorage.getItem('cart');
   if (saved) {
     cart = JSON.parse(saved);
+    window.cart = cart;
   }
 }
 
@@ -22,7 +23,8 @@ function addToCart(index) {
   const item = menuItems[index];
   let size, flavor, qty, glutenFree, sugarFree;
 
-  const modalOpen = !document.getElementById('productModal').classList.contains('hidden');
+  const modal = document.getElementById('productModal');
+  const modalOpen = modal && modal.open;
 
   if (modalOpen) {
     size = document.getElementById('modal-size').value;
@@ -419,6 +421,7 @@ window.calculateShipping = calculateShipping;
 
 document.addEventListener('DOMContentLoaded', function() {
   loadCart();
+  updateCart();
   checkShippingAvailability();
   calculateTotals();
 
@@ -430,8 +433,10 @@ document.addEventListener('DOMContentLoaded', function() {
   maxDate.setDate(today.getDate() + 14);
 
   const pickupDateInput = document.getElementById('pickupDate');
-  pickupDateInput.min = minDate.toISOString().split('T')[0];
-  pickupDateInput.max = maxDate.toISOString().split('T')[0];
-  // Set default to min date
-  pickupDateInput.value = pickupDateInput.min;
+  if (pickupDateInput) {
+    pickupDateInput.min = minDate.toISOString().split('T')[0];
+    pickupDateInput.max = maxDate.toISOString().split('T')[0];
+    // Set default to min date
+    pickupDateInput.value = pickupDateInput.min;
+  }
 });
