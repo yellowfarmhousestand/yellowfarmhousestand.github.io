@@ -305,14 +305,12 @@ function filterAndDisplay() {
     filtered = filtered.filter(item => item.name.toLowerCase().includes(searchQuery));
   }
 
-  // Dietary filters
-  const gfFilter = document.getElementById("filter-gf").checked;
-  const sfFilter = document.getElementById("filter-sf").checked;
-  if (gfFilter || sfFilter) {
+  // Dietary filters (updated to use button states and OR logic)
+  if (gfFilterActive || sfFilterActive) {
     filtered = filtered.filter(item => {
-      if (gfFilter && !item.canGlutenfree) return false;
-      if (sfFilter && !item.canSugarfree) return false;
-      return true;
+      if (gfFilterActive && item.canGlutenfree) return true;
+      if (sfFilterActive && item.canSugarfree) return true;
+      return false; // Only include if at least one filter matches
     });
   }
 
