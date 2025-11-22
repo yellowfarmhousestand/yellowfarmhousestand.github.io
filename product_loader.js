@@ -137,9 +137,11 @@ function displayProducts(products) {
 
   for (const category of sortedCategories) {
     const items = productsByCategory[category];
-    const sectionResult = createCategorySection(category, items, globalIndex);
-    grid.appendChild(sectionResult.node);
-    globalIndex = sectionResult.nextIndex;
+    if (items && items.length > 0) {
+      const sectionResult = createCategorySection(category, items, globalIndex);
+      grid.appendChild(sectionResult.node);
+      globalIndex = sectionResult.nextIndex;
+    }
   }
   console.log("Products displayed");
 }
@@ -210,7 +212,7 @@ function createProductCard(item, index) {
 
   const card = document.createElement("div");
   card.className = "product-grid-card";
-  card.onclick = () => openProductModal(index);
+  card.onclick = () => openProductModal(menuItems.indexOf(item));
 
   const imgWrap = document.createElement("div");
   imgWrap.className = "product-image";
