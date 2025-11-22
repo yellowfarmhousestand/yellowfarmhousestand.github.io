@@ -307,11 +307,13 @@ function filterAndDisplay() {
     filtered = filtered.filter((item) => item.name.toLowerCase().includes(searchQuery));
   }
 
-  // Dietary filters (updated to use button states and OR logic)
-  if (gfFilterActive || sfFilterActive) {
+  // Dietary filters (use checkbox states directly)
+  const gfFilter = document.getElementById("filter-gf")?.checked;
+  const sfFilter = document.getElementById("filter-sf")?.checked;
+  if (gfFilter || sfFilter) {
     filtered = filtered.filter((item) => {
-      if (gfFilterActive && item.canGlutenfree) return true;
-      if (sfFilterActive && item.canSugarfree) return true;
+      if (gfFilter && item.canGlutenfree) return true;
+      if (sfFilter && item.canSugarfree) return true;
       return false; // Only include if at least one filter matches
     });
   }
