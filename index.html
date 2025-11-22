@@ -59,7 +59,10 @@
             🌾 Yellow Farmhouse Treats
           </a>
           <a href="cart.html" class="cart-icon" aria-label="View cart and checkout">
-            🛒 <span class="cart-badge" id="cartBadge" aria-live="polite" aria-label="Items in cart">0</span>
+            🛒
+            <span class="cart-badge" id="cartBadge" aria-live="polite" aria-label="Items in cart"
+              >0</span
+            >
           </a>
         </div>
         <div class="header-subtitle">Fresh Baked Goods</div>
@@ -130,9 +133,21 @@
           </div>
 
           <!-- Product Modal -->
-          <dialog id="productModal" aria-modal="true" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalContent">
+          <dialog
+            id="productModal"
+            aria-modal="true"
+            role="dialog"
+            aria-labelledby="modalTitle"
+            aria-describedby="modalContent"
+          >
             <div class="modal-content" tabindex="-1">
-              <button class="modal-close" aria-label="Close product details" onclick="closeProductModal()">&times;</button>
+              <button
+                class="modal-close"
+                aria-label="Close product details"
+                onclick="closeProductModal()"
+              >
+                &times;
+              </button>
               <div id="modalContent"></div>
             </div>
           </dialog>
