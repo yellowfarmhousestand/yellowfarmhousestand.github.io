@@ -470,5 +470,11 @@ function updateDietaryOptionsInModal() {
   // Similar, but for now, skip if not needed.
 }
 
+// Expose functions to global scope
+window.openProductModal = openProductModal;
+window.closeProductModal = closeProductModal;
+window.updatePriceInModal = updatePriceInModal;
+window.updateDietaryOptionsInModal = updateDietaryOptionsInModal;
+
 // ========== INITIALIZE ON PAGE LOAD ==========
 document.addEventListener("DOMContentLoaded", initializeProducts);

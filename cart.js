@@ -405,6 +405,11 @@ window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
 window.clearCart = clearCart;
 window.proceedToCart = proceedToCart;
+window.showSuccess = showSuccess;
+window.showError = showError;
+window.updatePaymentDetails = updatePaymentDetails;
+window.handleFulfillmentChange = handleFulfillmentChange;
+window.calculateShipping = calculateShipping;
 
 document.addEventListener('DOMContentLoaded', function() {
   loadCart();
