@@ -24,8 +24,7 @@ async function initializeProducts() {
   const products = await loadProducts();
   console.log("Loaded products:", products.length);
 
-  spinner.classList.add("hidden");
-
+  spinner.style.display = "none";
   generateCategoryTabs();
   displayProducts(products);
 
