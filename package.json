@@ -1,0 +1,12 @@
+{
+  "name": "yellowfarmhousetreats",
+  "private": true,
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css,html,json}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  }
+}

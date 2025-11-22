@@ -1,0 +1,9 @@
+# Ignore minified assets
+*.min.js
+*.min.css
+# Build artifacts
+node_modules/
+# Images
+images/
+# Cache
+*.cache
