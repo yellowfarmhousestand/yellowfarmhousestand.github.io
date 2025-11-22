@@ -378,17 +378,16 @@ function openProductModal(index) {
     }
   };
   modal.addEventListener("keydown", keyHandler);
-  modal.dataset.keyHandlerAttached = "true";
+  modal._keyHandler = keyHandler;  // Store reference for later removal
   modal.showModal();
 }
 
 function closeProductModal() {
   const modal = document.getElementById("productModal");
   modal.removeEventListener("click", handleBackdropClick);
-  if (modal.dataset.keyHandlerAttached) {
-    // Remove all keydown handlers by cloning (quick way without tracking reference)
-    const clone = modal.cloneNode(true);
-    modal.parentNode.replaceChild(clone, modal);
+  if (modal._keyHandler) {
+    modal.removeEventListener("keydown", modal._keyHandler);
+    delete modal._keyHandler;
   }
   modal.close();
   document.getElementById("modalContent").innerHTML = "";
