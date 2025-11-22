@@ -5,7 +5,7 @@
         }
 
         :root {
-            --color-primary: #d4af37;
+            --color-primary: #8B7355;
             --color-primary-dark: #8b7220;
             --color-accent: #c41e3a;
             --color-secondary: #2c5aa0;
@@ -19,8 +19,12 @@
 
         body {
             font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(135deg, var(--color-bg) 0%, #fff9e6 100%);
-            padding: 20px;
+    background-color: #f5f1e8;
+    background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 115, 85, 0.03) 2px, rgba(139, 115, 85, 0.03) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139, 115, 85, 0.03) 2px, rgba(139, 115, 85, 0.03) 4px),
+        repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(139, 115, 85, 0.02) 5px, rgba(139, 115, 85, 0.02) 10px),
+        repeating-linear-gradient(-45deg, transparent, transparent 5px, rgba(139, 115, 85, 0.02) 5px, rgba(139, 115, 85, 0.02) 10px);            padding: 20px;
             min-height: 100vh;
             color: var(--color-text);
         }
@@ -35,7 +39,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #d4af37 0%, #c99f3a 100%);
+            background: linear-gradient(135deg, #8B7355 0%, #c99f3a 100%);
             color: #2c3e50;
             padding: 50px 30px;
             text-align: center;
@@ -64,7 +68,7 @@
   position: relative;
   top: 0;
   z-index: 1000;
-  background: linear-gradient(135deg, ▓#d4af37 0%, ▓#b8722 100%);
+  background: linear-gradient(135deg, ▓#8B7355 0%, ▓#b8722 100%);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -191,7 +195,7 @@
             background: linear-gradient(135deg, #f5f1e8 0%, #ede8df 100%);
             padding: 30px;
             text-align: center;
-            border-bottom: 3px solid #d4af37;
+            border-bottom: 3px solid #8B7355;
         }
 
         .instagram-showcase-title {
@@ -234,7 +238,7 @@
 
         .instagram-follow a:hover {
             text-decoration: underline;
-            color: #d4af37;
+            color: #8B7355;
         }
 
         .content {
@@ -249,7 +253,7 @@
             margin-top: 30px;
             margin-bottom: 20px;
             padding-bottom: 12px;
-            border-bottom: 3px solid #d4af37;
+            border-bottom: 3px solid #8B7355;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -262,7 +266,7 @@
         .note-box {
             background: #fffef8;
             padding: 15px;
-            border-left: 4px solid #d4af37;
+            border-left: 4px solid #8B7355;
             border-radius: 4px;
             margin-bottom: 20px;
             font-size: 0.95em;
@@ -276,7 +280,7 @@
             margin-bottom: 20px;
             font-size: 0.9em;
             color: var(--color-text);
-            border-left: 3px solid #d4af37;
+            border-left: 3px solid #8B7355;
         }
 
         .footnote-legend strong {
@@ -314,7 +318,7 @@
             margin: 40px 0 25px 0;
             text-align: center;
             text-transform: capitalize;
-            border-bottom: 3px solid #d4af37;
+            border-bottom: 3px solid #8B7355;
             padding-bottom: 10px;
         }
 
@@ -329,7 +333,7 @@
         }
 
         .product-card:hover {
-            border-color: #d4af37;
+            border-color: #8B7355;
             box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
             transition: all 0.3s;
         }
@@ -402,7 +406,7 @@
 
         select:focus, input:focus, textarea:focus {
             outline: none;
-            border-color: #d4af37;
+            border-color: #8B7355;
             box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
         }
 
@@ -443,7 +447,7 @@
         /* DIETARY OPTIONS */
         .dietary-section {
             background: #fffbf0;
-            border: 2px solid #d4af37;
+            border: 2px solid #8B7355;
             border-radius: 6px;
             padding: 12px;
             margin-top: 12px;
@@ -502,7 +506,7 @@
             background: white;
             padding: 15px;
             margin-bottom: 12px;
-            border-left: 5px solid #d4af37;
+            border-left: 5px solid #8B7355;
             border-radius: 4px;
             display: flex;
             justify-content: space-between;
@@ -640,7 +644,7 @@
             padding: 10px;
             background: #fffbf0;
             border-radius: 4px;
-            border-left: 3px solid #d4af37;
+            border-left: 3px solid #8B7355;
         }
 
         .hidden-section {
@@ -654,7 +658,7 @@
         /* DEPOSIT SECTION */
         .deposit-alert {
             background: linear-gradient(135deg, #fff9e6 0%, #fffbf0 100%);
-            border: 2px solid #d4af37;
+            border: 2px solid #8B7355;
             border-radius: 6px;
             padding: 20px;
             margin-bottom: 20px;
@@ -716,7 +720,7 @@
         }
 
         .payment-option:hover {
-            border-color: #d4af37;
+            border-color: #8B7355;
             background: #fffbf0;
         }
 
@@ -752,7 +756,7 @@
             border-radius: 4px;
             margin-top: 15px;
             font-size: 0.9em;
-            border-left: 3px solid #d4af37;
+            border-left: 3px solid #8B7355;
             display: none;
         }
 
@@ -765,7 +769,7 @@
 
         .payment-details a:hover {
             text-decoration: underline;
-            color: #d4af37;
+            color: #8B7355;
         }
 
         .payment-note {
@@ -774,13 +778,13 @@
             margin-top: 15px;
             padding: 12px;
             background: #fffbf0;
-            border-left: 3px solid #d4af37;
+            border-left: 3px solid #8B7355;
             border-radius: 4px;
         }
 
         /* ORDER SUMMARY */
         .summary-box {
-            background: linear-gradient(135deg, #d4af37 0%, #c99f3a 100%);
+            background: linear-gradient(135deg, #8B7355 0%, #c99f3a 100%);
             color: #2c3e50;
             padding: 25px;
             border-radius: 6px;
@@ -1063,13 +1067,13 @@
 }
 
 .tab-button:hover {
-    border-color: #d4af37;
+    border-color: #8B7355;
 }
 
 .tab-button.active {
-    background: #d4af37;
+    background: #8B7355;
     color: #000;
-    border-color: #d4af37;
+    border-color: #8B7355;
 }
 
 .category-select {
@@ -1085,7 +1089,7 @@
 }
 
 .category-select:hover, .category-select:focus {
-    border-color: #d4af37;
+    border-color: #8B7355;
     outline: none;
     box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
 }
@@ -1121,7 +1125,7 @@
 
 .spinner {
     border: 4px solid #f3f3f3;
-    border-top: 4px solid #d4af37;
+    border-top: 4px solid #8B7355;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -1205,7 +1209,7 @@
     color: #8b7220;
     margin: 20px 0 15px 0;
     text-align: center;
-    border-bottom: 2px solid #d4af37;
+    border-bottom: 2px solid #8B7355;
     padding-bottom: 8px;
 }
 
@@ -1226,7 +1230,7 @@
 }
 
 .product-grid-card:hover {
-    border-color: #d4af37;
+    border-color: #8B7355;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
