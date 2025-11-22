@@ -220,6 +220,7 @@ function createProductCard(item, index) {
     const img = document.createElement("img");
     img.src = item.image;
     img.alt = item.name || "Product Image";
+    img.loading = 'lazy';  // Add lazy loading
     imgWrap.appendChild(img);
   } else {
     imgWrap.innerHTML = '<div class="image-placeholder">Image Coming Soon</div>';
@@ -329,6 +330,13 @@ function openProductModal(index) {
   const item = menuItems[index];
   const modalContent = document.getElementById('modalContent');
   modalContent.innerHTML = createModalContent(item, index);
+  
+  // Lazy load modal image
+  const modalImg = modalContent.querySelector('.product-image img');
+  if (modalImg?.dataset?.src) {
+    modalImg.src = modalImg.dataset.src;
+  }
+  
   const modal = document.getElementById('productModal');
   modal.addEventListener('click', handleBackdropClick);
   modal.showModal();
@@ -357,7 +365,7 @@ function createModalContent(item, index) {
   // Image
   html += '<div class="product-image">';
   if (item.image) {
-    html += `<img src="${item.image}" alt="${item.name || 'Product Image'}">`;
+    html += `<img alt="${item.name || 'Product Image'}" data-src="${item.image}">`;  // Use data-src for lazy loading
   } else {
     html += '<div class="image-placeholder">Image Coming Soon</div>';
   }
