@@ -113,7 +113,7 @@
                 <!-- Product Modal -->
                 <dialog id="productModal">
                     <div class="modal-content">
-                        <button class="modal-close">&times;</button>
+                        <button class="modal-close" onclick="closeProductModal()">&times;</button>
                         <div id="modalContent"></div>
                     </div>
                 </dialog>
@@ -161,8 +161,9 @@
         const badge = document.getElementById('cartBadge');
         const cart = globalThis.cart || [];
         if (badge) {
-          badge.textContent = cart.length;
-          badge.style.display = cart.length > 0 ? 'flex' : 'none';
+          const itemCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+          badge.textContent = itemCount;
+          badge.style.display = itemCount > 0 ? 'flex' : 'none';
         }
       }
 

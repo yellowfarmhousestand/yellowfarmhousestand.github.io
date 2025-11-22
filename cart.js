@@ -1,7 +1,13 @@
 // ========== CART MANAGEMENT ==========
 let cart = [];
 
+// Expose cart array to global scope
+if (typeof window !== 'undefined') {
+  window.cart = cart;
+}
+
 function saveCart() {
+  window.cart = cart;
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
