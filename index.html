@@ -87,12 +87,12 @@
                 </div>
 
                 <!-- Product Modal -->
-                <div id="productModal" class="modal-overlay hidden">
+                <dialog id="productModal">
                     <div class="modal-content">
                         <button class="modal-close">&times;</button>
                         <div id="modalContent"></div>
                     </div>
-                </div>
+                </dialog>
 
                 <!-- ADDED ITEMS SUMMARY -->
                 <div class="order-items" id="orderItems">
@@ -133,7 +133,7 @@
       // Update cart badge count (call this from cart.js)
       function updateCartBadge() {
         const badge = document.getElementById('cartBadge');
-        const cart = window.cart || [];
+        const cart = globalThis.cart || [];
         if (badge) {
           badge.textContent = cart.length;
           badge.style.display = cart.length > 0 ? 'flex' : 'none';

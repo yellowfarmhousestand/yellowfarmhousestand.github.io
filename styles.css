@@ -1266,17 +1266,16 @@
 }
 
 /* MODAL */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+dialog {
+    border: none;
+    padding: 0;
+    background: transparent;
+    max-width: none;
+    max-height: none;
+}
+
+dialog::backdrop {
     background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
 }
 
 .modal-content {
@@ -1284,10 +1283,11 @@
     border-radius: 8px;
     max-width: 600px;
     width: 90%;
-    max-height: 90%;
+    max-height: 90vh;
     overflow-y: auto;
     position: relative;
     padding: 20px;
+    margin: auto;
 }
 
 .modal-close {

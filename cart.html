@@ -287,7 +287,7 @@
       // Update cart badge count (call this from cart.js)
       function updateCartBadge() {
         const badge = document.getElementById('cartBadge');
-        const cart = window.cart || [];
+        const cart = globalThis.cart || [];
         if (badge) {
           badge.textContent = cart.length;
           badge.style.display = cart.length > 0 ? 'flex' : 'none';

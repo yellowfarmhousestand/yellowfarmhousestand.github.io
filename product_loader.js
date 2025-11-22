@@ -53,8 +53,8 @@ function generateCategoryTabs() {
 
   // Get unique categories in desired order
   const categoryOrder = ["Cookie", "Brownie", "Cake", "Pastry", "Pie", "Bread", "Muffin", "Candy"];
-  const allCategories = [...new Set(menuItems.map(item => item.category))];
-  const categories = categoryOrder.filter(cat => allCategories.includes(cat));
+  const allCategories = new Set(menuItems.map(item => item.category));
+  const categories = categoryOrder.filter(cat => allCategories.has(cat));
 
   for (const cat of categories) {
     const option = document.createElement("option");
@@ -130,7 +130,7 @@ function displayProducts(products) {
 
   // Sort categories with Cookie first
   const categoryOrder = ["Cookie"];
-  const otherCategories = Object.keys(productsByCategory).filter(cat => cat !== "Cookie").sort();
+  const otherCategories = Object.keys(productsByCategory).filter(cat => cat !== "Cookie").sort((a, b) => a.localeCompare(b));
   const sortedCategories = [...categoryOrder, ...otherCategories];
 
   let globalIndex = 0;
@@ -261,7 +261,7 @@ function getDefaultPrice(item) {
   if (typeof item.basePrice === "number") return item.basePrice;
   if (item.sizes && item.sizes.length > 0 && item.sizePrice) {
     const firstSize = item.sizes[0];
-    return item.sizePrice[firstSize] || 0;
+    return item.sizePrice[firstSize.replaceAll(' ', '_')] || 0;
   }
   return 0;
 }
@@ -328,27 +328,19 @@ function openProductModal(index) {
   const modalContent = document.getElementById('modalContent');
   modalContent.innerHTML = createModalContent(item, index);
   const modal = document.getElementById('productModal');
-  const content = document.getElementById('modalContent');
-  const closeBtn = document.querySelector('.modal-close');
-  
-  modal.addEventListener('click', closeProductModal);
-  content.addEventListener('click', stopModalPropagation);
-  closeBtn.addEventListener('click', closeProductModal);
-  
-  modal.classList.remove('hidden');
+  modal.addEventListener('click', handleBackdropClick);
+  modal.showModal();
 }
 
 function closeProductModal() {
   const modal = document.getElementById('productModal');
-  const content = document.getElementById('modalContent');
-  const closeBtn = document.querySelector('.modal-close');
-  
-  modal.removeEventListener('click', closeProductModal);
-  content.removeEventListener('click', stopModalPropagation);
-  closeBtn.removeEventListener('click', closeProductModal);
-  
-  modal.classList.add('hidden');
+  modal.removeEventListener('click', handleBackdropClick);
+  modal.close();
   document.getElementById('modalContent').innerHTML = '';
+}
+
+function handleBackdropClick(e) {
+  if (e.target === this) closeProductModal();
 }
 
 function stopModalPropagation(e) {
@@ -462,10 +454,3 @@ function updateDietaryOptionsInModal() {
 
 // ========== INITIALIZE ON PAGE LOAD ==========
 document.addEventListener("DOMContentLoaded", initializeProducts);
-
-// Add ESC key listener for modal
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeProductModal();
-  }
-});

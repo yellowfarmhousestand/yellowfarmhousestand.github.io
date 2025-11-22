@@ -13,8 +13,8 @@
   },
   {
     "name": "Pumpkin Bread",
-    "sizes": ["Loaf"],
-    "sizePrice": { "Loaf": 12 },
+    "sizes": ["Single", "Half Dozen", "Dozen"],
+    "sizePrice": { "Single": 6, "Half_Dozen": 30, "Dozen": 50 },
     "flavors": ["Standard"],
     "canGlutenfree": false,
     "canSugarfree": false,
@@ -22,18 +22,6 @@
     "canShip": false,
     "weight": 0,
     "image": "images/pumpkin-bread.jpg"
-  },
-  {
-    "name": "Mini Cakes (Cream Cheese Frosting)",
-    "sizes": ["Single", "Half Dozen", "Dozen"],
-    "sizePrice": { "Single": 6, "Half_Dozen": 30, "Dozen": 50 },
-    "flavors": ["Standard"],
-    "canGlutenfree": false,
-    "canSugarfree": false,
-    "category": "Cake",
-    "canShip": false,
-    "weight": 0,
-    "image": "images/mini-cakes-cream-cheese-frosting.jpg"
   },
   {
     "name": "Cinnamon Rolls",
@@ -467,12 +455,12 @@
   },
   {
     "name": "Brownies - Large",
-    "sizes": ["4-Pack"],
-    "sizePrice": { "4-Pack": 18 },
+    "sizes": ["1", "4-Pack"],
+    "sizePrice": { "1": 5, "4-Pack": 18 },
     "flavors": ["Standard"],
     "canGlutenfree": true,
     "canSugarfree": false,
-    "category": "Brownie",
+    "category": "Cake",
     "canShip": false,
     "weight": 0,
     "image": "images/brownies-large.jpg"

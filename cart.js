@@ -54,10 +54,10 @@ function addToCart(index) {
   saveCart();
   showSuccess(`Added ${qty}x ${item.name} to order!`);
   
-  if (!modalOpen) {
-    document.getElementById(`qty-${index}`).value = 1;
-  } else {
+  if (modalOpen) {
     closeProductModal();
+  } else {
+    document.getElementById(`qty-${index}`).value = 1;
   }
 }
 
@@ -395,7 +395,7 @@ function proceedToCart() {
   } else {
     document.getElementById('emptyCartAlert').classList.add('hidden');
     document.getElementById('readyToProceedAlert').classList.add('hidden');
-    window.location.href = 'cart.html';
+    globalThis.location.href = 'cart.html';
   }
 }
 
