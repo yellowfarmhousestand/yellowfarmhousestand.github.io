@@ -66,13 +66,14 @@ function addToCart(index) {
   cart.push(cartItem);
   updateCart();
   saveCart();
-  showSuccess(`Added ${qty}x ${item.name} to order!`);
 
   if (modalOpen) {
     closeProductModal();
   } else {
     document.getElementById(`qty-${index}`).value = 1;
   }
+
+  showSuccess(`Added ${qty}x ${item.name} to order!`);
 }
 
 function updateCart() {
