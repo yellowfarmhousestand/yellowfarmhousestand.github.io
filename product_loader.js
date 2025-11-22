@@ -327,12 +327,32 @@ function openProductModal(index) {
   const item = menuItems[index];
   const modalContent = document.getElementById('modalContent');
   modalContent.innerHTML = createModalContent(item, index);
-  document.getElementById('productModal').classList.remove('hidden');
+  const modal = document.getElementById('productModal');
+  const content = document.getElementById('modalContent');
+  const closeBtn = document.querySelector('.modal-close');
+  
+  modal.addEventListener('click', closeProductModal);
+  content.addEventListener('click', stopModalPropagation);
+  closeBtn.addEventListener('click', closeProductModal);
+  
+  modal.classList.remove('hidden');
 }
 
 function closeProductModal() {
-  document.getElementById('productModal').classList.add('hidden');
+  const modal = document.getElementById('productModal');
+  const content = document.getElementById('modalContent');
+  const closeBtn = document.querySelector('.modal-close');
+  
+  modal.removeEventListener('click', closeProductModal);
+  content.removeEventListener('click', stopModalPropagation);
+  closeBtn.removeEventListener('click', closeProductModal);
+  
+  modal.classList.add('hidden');
   document.getElementById('modalContent').innerHTML = '';
+}
+
+function stopModalPropagation(e) {
+  e.stopPropagation();
 }
 
 function createModalContent(item, index) {
