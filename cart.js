@@ -7,16 +7,23 @@ if (typeof window !== "undefined") {
 }
 
 function saveCart() {
-  window.cart = cart;
   localStorage.setItem("cart", JSON.stringify(cart));
+  window.cart = cart;
 }
 
 function loadCart() {
   const saved = localStorage.getItem("cart");
   if (saved) {
-    cart = JSON.parse(saved);
-    window.cart = cart;
+    try {
+      cart = JSON.parse(saved);
+      window.cart = cart;
+    } catch (e) {
+      console.error("Failed to load cart from localStorage:", e);
+      cart = [];
+      window.cart = cart;
+    }
   }
+  return cart;
 }
 
 function addToCart(index) {
@@ -78,6 +85,11 @@ function addToCart(index) {
 
 function updateCart() {
   const orderItemsDiv = document.getElementById("orderItems");
+
+  if (!orderItemsDiv) {
+    console.warn("orderItems div not found");
+    return;
+  }
 
   if (cart.length === 0) {
     orderItemsDiv.innerHTML = '<div class="empty-items">No items added yet</div>';
@@ -466,9 +478,14 @@ window.showError = showError;
 window.updatePaymentDetails = updatePaymentDetails;
 window.handleFulfillmentChange = handleFulfillmentChange;
 window.calculateShipping = calculateShipping;
+window.loadCart = loadCart;
+window.updateCart = updateCart;
+
+// Load cart immediately when script loads
+loadCart();
 
 document.addEventListener("DOMContentLoaded", function () {
-  loadCart();
+  // Cart is already loaded, just update UI
   updateCart();
   checkShippingAvailability();
   calculateTotals();
