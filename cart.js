@@ -364,6 +364,16 @@ document.addEventListener('DOMContentLoaded', function() {
   checkShippingAvailability();
   calculateTotals();
 
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('pickupDate').min = today;
+  // Set pickup date restrictions: min 2 days, max 14 days
+  const today = new Date();
+  const minDate = new Date(today);
+  minDate.setDate(today.getDate() + 2);
+  const maxDate = new Date(today);
+  maxDate.setDate(today.getDate() + 14);
+
+  const pickupDateInput = document.getElementById('pickupDate');
+  pickupDateInput.min = minDate.toISOString().split('T')[0];
+  pickupDateInput.max = maxDate.toISOString().split('T')[0];
+  // Set default to min date
+  pickupDateInput.value = pickupDateInput.min;
 });
