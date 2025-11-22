@@ -5,7 +5,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,css,html,json}'",
-    "build:js": "terser product_loader.js -o product_loader.min.js && terser cart.js -o cart.min.js",
+    "build:js": "terser product_loader.js -o product_loader.min.js",
     "build:css": "csso styles.css --output styles.min.css",
     "build": "npm run build:js && npm run build:css && npm run postbuild",
     "postbuild": "node scripts/cacheBust.js && node scripts/update-sitemap.js"
