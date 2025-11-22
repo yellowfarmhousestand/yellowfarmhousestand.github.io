@@ -1,0 +1,17 @@
+# Node / tooling
+node_modules/
+package-lock.json
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+
+# Build / cache
+*.cache
+
+# Misc
+*.zip
