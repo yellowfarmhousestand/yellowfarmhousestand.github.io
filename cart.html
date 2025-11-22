@@ -1,292 +1,376 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yellow Farmhous
-            
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Complete your order for fresh, custom baked goods from Yellow Farmhouse Treats in Caldwell, Idaho.">
-    <link rel="canonical" href="https://www.yellowfarmhousetreats.com/cart.html">
-    <meta name="robots" content="noindex, nofollow">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Checkout - Yellow Farmhouse Treats">
-    <meta property="og:description" content="Complete your order for fresh, custom baked goods.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.yellowfarmhousetreats.com/cart.html">e Treats - Checkout</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Yellow Farmhous <!-- SEO Meta Tags --> <meta name="description" content="Complete your order
+      for fresh, custom baked goods from Yellow Farmhouse Treats in Caldwell, Idaho."> <link
+      rel="canonical" href="https://www.yellowfarmhousetreats.com/cart.html"> <meta name="robots"
+      content="noindex, nofollow"> <!-- Open Graph Meta Tags --> <meta property="og:title"
+      content="Checkout - Yellow Farmhouse Treats"> <meta property="og:description"
+      content="Complete your order for fresh, custom baked goods."> <meta property="og:type"
+      content="website"> <meta property="og:url"
+      content="https://www.yellowfarmhousetreats.com/cart.html">e Treats - Checkout
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <!-- SnapWidget for Instagram -->
     <script src="https://snapwidget.com/js/snapwidget.js"></script>
-    <link rel="stylesheet" href="styles.min.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.min.css" />
+  </head>
+  <body>
     <div class="container">
-    <!-- Sticky Navigation Header -->
-    <header class="sticky-header">
-      <div class="nav-container">
-        <a href="tel:+18057094686" class="phone-btn" aria-label="Call us">
-          📞 <span class="phone-text">Call</span>
-        </a>
-        <a href="#top" class="brand-name" onclick="scrollToTop(event)">
-          🌾 Yellow Farmhouse Treats
-        </a>
-        <a href="index.html" class="cart-icon" aria-label="Back to products">
-          🛒 <span class="cart-badge" id="cartBadge">0</span>
-        </a>
+      <!-- Sticky Navigation Header -->
+      <header class="sticky-header">
+        <div class="nav-container">
+          <a href="tel:+18057094686" class="phone-btn" aria-label="Call us">
+            📞 <span class="phone-text">Call</span>
+          </a>
+          <a href="#top" class="brand-name" onclick="scrollToTop(event)">
+            🌾 Yellow Farmhouse Treats
+          </a>
+          <a href="index.html" class="cart-icon" aria-label="Back to products">
+            🛒 <span class="cart-badge" id="cartBadge">0</span>
+          </a>
+        </div>
+        <div class="header-subtitle">Checkout</div>
+      </header>
+      <!-- ========== INSTAGRAM FEED - SHOWCASED UNDER HEADER ========== -->
+      <div class="instagram-showcase">
+        <div class="instagram-showcase-title">📸 Check Out Our Latest Creations!</div>
+        <div class="instagram-container">
+          <!-- SnapWidget -->
+          <iframe
+            src="https://snapwidget.com/embed/1112051"
+            class="snapwidget-widget"
+            title="Posts from Instagram"
+          ></iframe>
+        </div>
+        <div class="instagram-follow">
+          <p>
+            Follow
+            <a href="https://instagram.com/yellowfarmhousetreats" target="_blank" rel="noopener"
+              >@yellowfarmhousetreats</a
+            >
+            for daily updates and behind-the-scenes content! 🌻
+          </p>
+        </div>
       </div>
-      <div class="header-subtitle">Checkout</div>
-    </header>
-        <!-- ========== INSTAGRAM FEED - SHOWCASED UNDER HEADER ========== -->
-        <div class="instagram-showcase">
-            <div class="instagram-showcase-title">📸 Check Out Our Latest Creations!</div>
-            <div class="instagram-container">
-                <!-- SnapWidget -->
-                <iframe src="https://snapwidget.com/embed/1112051" class="snapwidget-widget" title="Posts from Instagram"></iframe>
-            </div>
-            <div class="instagram-follow">
-                <p>Follow <a href="https://instagram.com/yellowfarmhousetreats" target="_blank" rel="noopener">@yellowfarmhousetreats</a> for daily updates and behind-the-scenes content! 🌻</p>
-            </div>
+
+      <div class="contact-info">
+        <p>
+          <strong>📍 22659 Farmway Road, Caldwell, ID</strong> | <strong>📞 (805) 709-4686</strong>
+        </p>
+        <p>Please allow up to 48 hours for items to be prepared.</p>
+      </div>
+
+      <form id="orderForm" action="https://formspree.io/f/mblpnapy" method="POST" class="content">
+        <!-- ========== CART ITEMS ========== -->
+        <div class="step-container">
+          <div class="section-title">🛒 Your Cart</div>
+
+          <div class="order-items" id="orderItems">
+            <div class="empty-items">No items in cart</div>
+          </div>
         </div>
 
-        <div class="contact-info">
-            <p><strong>📍 22659 Farmway Road, Caldwell, ID</strong> | <strong>📞 (805) 709-4686</strong></p>
-            <p>Please allow up to 48 hours for items to be prepared.</p>
+        <!-- Hidden field for order summary -->
+        <input type="hidden" id="orderSummary" name="order_items" value="" />
+
+        <!-- ========== STEP 1: CUSTOMER INFORMATION ========== -->
+        <div class="step-container">
+          <div class="section-title">👤 Step 1: Your Information</div>
+
+          <div class="form-section">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="customerName">Full Name *</label>
+                <input type="text" id="customerName" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="customerPhone">Phone Number *</label>
+                <input type="tel" id="customerPhone" name="phone" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="customerEmail">Email Address</label>
+                <input type="email" id="customerEmail" name="email" />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <form id="orderForm" action="https://formspree.io/f/mblpnapy" method="POST" class="content">
+        <!-- ========== STEP 2: FULFILLMENT METHOD ========== -->
+        <div class="step-container">
+          <div class="section-title">🚚 Step 2: How Would You Like Your Order?</div>
 
-            <!-- ========== CART ITEMS ========== -->
-            <div class="step-container">
-                <div class="section-title">🛒 Your Cart</div>
-                
-                <div class="order-items" id="orderItems">
-                    <div class="empty-items">No items in cart</div>
-                </div>
+          <div class="form-section">
+            <div class="fulfillment-options">
+              <div class="fulfillment-option">
+                <input
+                  type="radio"
+                  id="fulfillmentPickup"
+                  name="fulfillment_method"
+                  value="Pickup"
+                  checked
+                  onchange="handleFulfillmentChange()"
+                />
+                <label for="fulfillmentPickup" class="fulfillment-label">
+                  <strong>📍 Pickup</strong>
+                  <small>Pick up at farmstand</small>
+                </label>
+              </div>
+              <div class="fulfillment-option" id="shippingOption">
+                <input
+                  type="radio"
+                  id="fulfillmentShip"
+                  name="fulfillment_method"
+                  value="Shipping"
+                  onchange="handleFulfillmentChange()"
+                  disabled
+                />
+                <label for="fulfillmentShip" class="fulfillment-label">
+                  <strong>📦 Ship to Me</strong>
+                  <small>Delivered to your address</small>
+                </label>
+              </div>
             </div>
 
-            <!-- Hidden field for order summary -->
-            <input type="hidden" id="orderSummary" name="order_items" value="">
-
-            <!-- ========== STEP 1: CUSTOMER INFORMATION ========== -->
-            <div class="step-container">
-                <div class="section-title">👤 Step 1: Your Information</div>
-                
-                <div class="form-section">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="customerName">Full Name *</label>
-                            <input type="text" id="customerName" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="customerPhone">Phone Number *</label>
-                            <input type="tel" id="customerPhone" name="phone" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="customerEmail">Email Address</label>
-                            <input type="email" id="customerEmail" name="email">
-                        </div>
-                    </div>
-                </div>
+            <div class="fulfillment-note hidden" id="fulfillmentNote">
+              💡 Shipping is only available when ordering Pecan English Toffee.
             </div>
 
-            <!-- ========== STEP 2: FULFILLMENT METHOD ========== -->
-            <div class="step-container">
-                <div class="section-title">🚚 Step 2: How Would You Like Your Order?</div>
-                
-                <div class="form-section">
-                    <div class="fulfillment-options">
-                        <div class="fulfillment-option">
-                            <input type="radio" id="fulfillmentPickup" name="fulfillment_method" value="Pickup" checked onchange="handleFulfillmentChange()">
-                            <label for="fulfillmentPickup" class="fulfillment-label">
-                                <strong>📍 Pickup</strong>
-                                <small>Pick up at farmstand</small>
-                            </label>
-                        </div>
-                        <div class="fulfillment-option" id="shippingOption">
-                            <input type="radio" id="fulfillmentShip" name="fulfillment_method" value="Shipping" onchange="handleFulfillmentChange()" disabled>
-                            <label for="fulfillmentShip" class="fulfillment-label">
-                                <strong>📦 Ship to Me</strong>
-                                <small>Delivered to your address</small>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="fulfillment-note hidden" id="fulfillmentNote">
-                        💡 Shipping is only available when ordering Pecan English Toffee.
-                    </div>
-
-                    <!-- PICKUP SECTION -->
-                    <div id="pickupSection" class="visible margin-top-20">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="pickupDate">Pickup Date (2-14 days from today) *</label>
-                                <input type="date" id="pickupDate" name="pickup_date" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="pickupTime">Pickup Time *</label>
-                                <input type="time" id="pickupTime" name="pickup_time" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SHIPPING SECTION (Hidden by default) -->
-                    <div id="shippingSection" class="hidden-section margin-top-20">
-                        <div class="form-row full">
-                            <div class="form-group">
-                                <label for="shippingAddress">Shipping Address *</label>
-                                <input type="text" id="shippingAddress" name="shipping_address" placeholder="Street address">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="shippingCity">City *</label>
-                                <input type="text" id="shippingCity" name="shipping_city">
-                            </div>
-                            <div class="form-group">
-                                <label for="shippingState">State *</label>
-                                <input type="text" id="shippingState" name="shipping_state" placeholder="ID" maxlength="2">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="shippingZip">ZIP Code *</label>
-                                <input type="text" id="shippingZip" name="shipping_zip" onchange="calculateShipping()">
-                            </div>
-                            <div class="form-group">
-                                <span>Estimated Shipping Cost</span>
-                                <div class="shipping-cost-display">
-                                    <span id="shippingCost">$0.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- PICKUP SECTION -->
+            <div id="pickupSection" class="visible margin-top-20">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="pickupDate">Pickup Date (2-14 days from today) *</label>
+                  <input type="date" id="pickupDate" name="pickup_date" required />
                 </div>
+                <div class="form-group">
+                  <label for="pickupTime">Pickup Time *</label>
+                  <input type="time" id="pickupTime" name="pickup_time" required />
+                </div>
+              </div>
             </div>
 
-            <!-- ========== STEP 3: SPECIAL INSTRUCTIONS ========== -->
-            <div class="step-container">
-                <div class="section-title">💬 Step 3: Special Instructions</div>
-                
-                <div class="form-section">
-                    <div class="form-row full">
-                        <div class="form-group">
-                            <label for="specialInstructions">Any special requests or dietary needs?</label>
-                            <textarea id="specialInstructions" name="special_instructions" placeholder="E.g., gluten-free, sugar-free, allergies, delivery instructions, etc."></textarea>
-                        </div>
-                    </div>
+            <!-- SHIPPING SECTION (Hidden by default) -->
+            <div id="shippingSection" class="hidden-section margin-top-20">
+              <div class="form-row full">
+                <div class="form-group">
+                  <label for="shippingAddress">Shipping Address *</label>
+                  <input
+                    type="text"
+                    id="shippingAddress"
+                    name="shipping_address"
+                    placeholder="Street address"
+                  />
                 </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="shippingCity">City *</label>
+                  <input type="text" id="shippingCity" name="shipping_city" />
+                </div>
+                <div class="form-group">
+                  <label for="shippingState">State *</label>
+                  <input
+                    type="text"
+                    id="shippingState"
+                    name="shipping_state"
+                    placeholder="ID"
+                    maxlength="2"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="shippingZip">ZIP Code *</label>
+                  <input
+                    type="text"
+                    id="shippingZip"
+                    name="shipping_zip"
+                    onchange="calculateShipping()"
+                  />
+                </div>
+                <div class="form-group">
+                  <span>Estimated Shipping Cost</span>
+                  <div class="shipping-cost-display">
+                    <span id="shippingCost">$0.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== STEP 3: SPECIAL INSTRUCTIONS ========== -->
+        <div class="step-container">
+          <div class="section-title">💬 Step 3: Special Instructions</div>
+
+          <div class="form-section">
+            <div class="form-row full">
+              <div class="form-group">
+                <label for="specialInstructions">Any special requests or dietary needs?</label>
+                <textarea
+                  id="specialInstructions"
+                  name="special_instructions"
+                  placeholder="E.g., gluten-free, sugar-free, allergies, delivery instructions, etc."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== ORDER SUMMARY ========== -->
+        <div class="summary-box">
+          <div class="summary-title">📋 Order Summary</div>
+
+          <div class="summary-row">
+            <span>Subtotal:</span>
+            <span id="summarySubtotal">$0.00</span>
+          </div>
+          <div class="summary-row hidden" id="summaryShippingRow">
+            <span>Shipping:</span>
+            <span id="summaryShipping">$0.00</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total Due:</span>
+            <span id="summaryTotal">$0.00</span>
+          </div>
+          <div class="summary-row deposit" id="depositRow">
+            <span>💳 50% Deposit Due Now:</span>
+            <span id="summaryDeposit">$0.00</span>
+          </div>
+          <div class="summary-row balance-row" id="balanceRow">
+            <span>Balance Due at Pickup:</span>
+            <span id="summaryBalance">$0.00</span>
+          </div>
+        </div>
+
+        <!-- ========== DEPOSIT INFORMATION ========== -->
+        <div id="depositPickupInfo" class="deposit-alert hidden">
+          <strong>🔒 50% Deposit to Secure Your Pickup Appointment</strong>
+          <p>
+            A 50% deposit is required to confirm and secure your pickup appointment. The remaining
+            balance is due at the time of pickup.
+          </p>
+          <div class="deposit-row">
+            <div class="deposit-info">
+              <div class="deposit-info-label">Deposit Amount:</div>
+              <div class="deposit-amount-display" id="depositDisplayAmount">$0.00</div>
+            </div>
+            <div class="deposit-info">
+              <div class="deposit-info-label">Balance Due at Pickup:</div>
+              <div class="deposit-amount-display" id="balanceDisplayAmount">$0.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== STEP 4: PAYMENT METHOD ========== -->
+        <div class="step-container">
+          <div class="section-title">💵 Step 4: Select Payment Method</div>
+
+          <div class="form-section">
+            <div class="payment-options">
+              <label class="payment-option">
+                <input
+                  type="radio"
+                  id="paymentCash"
+                  name="payment_method"
+                  value="Cash"
+                  required
+                  onchange="updatePaymentDetails()"
+                />
+                <div class="payment-label">
+                  <strong>💵 Cash</strong>
+                  <small>Pay deposit now, balance at pickup</small>
+                </div>
+              </label>
+              <label class="payment-option">
+                <input
+                  type="radio"
+                  id="paymentCashApp"
+                  name="payment_method"
+                  value="Cash App"
+                  onchange="updatePaymentDetails()"
+                />
+                <div class="payment-label">
+                  <strong>💸 Cash App</strong>
+                  <small>$DanaBlueMoonHaven</small>
+                </div>
+              </label>
+              <label class="payment-option">
+                <input
+                  type="radio"
+                  id="paymentVenmo"
+                  name="payment_method"
+                  value="Venmo"
+                  onchange="updatePaymentDetails()"
+                />
+                <div class="payment-label">
+                  <strong>📱 Venmo</strong>
+                  <small>@BlueMoonHaven</small>
+                </div>
+              </label>
+              <label class="payment-option">
+                <input
+                  type="radio"
+                  id="paymentPayPal"
+                  name="payment_method"
+                  value="PayPal"
+                  onchange="updatePaymentDetails()"
+                />
+                <div class="payment-label">
+                  <strong>🅿️ PayPal</strong>
+                  <small>@BlueMoonHaven</small>
+                </div>
+              </label>
+              <label class="payment-option">
+                <input
+                  type="radio"
+                  id="paymentZelle"
+                  name="payment_method"
+                  value="Zelle"
+                  onchange="updatePaymentDetails()"
+                />
+                <div class="payment-label">
+                  <strong>🏦 Zelle</strong>
+                  <small>805-709-4686</small>
+                </div>
+              </label>
             </div>
 
-            <!-- ========== ORDER SUMMARY ========== -->
-            <div class="summary-box">
-                <div class="summary-title">📋 Order Summary</div>
-                
-                <div class="summary-row">
-                    <span>Subtotal:</span>
-                    <span id="summarySubtotal">$0.00</span>
-                </div>
-                <div class="summary-row hidden" id="summaryShippingRow">
-                    <span>Shipping:</span>
-                    <span id="summaryShipping">$0.00</span>
-                </div>
-                <div class="summary-row total">
-                    <span>Total Due:</span>
-                    <span id="summaryTotal">$0.00</span>
-                </div>
-                <div class="summary-row deposit" id="depositRow">
-                    <span>💳 50% Deposit Due Now:</span>
-                    <span id="summaryDeposit">$0.00</span>
-                </div>
-                <div class="summary-row balance-row" id="balanceRow">
-                    <span>Balance Due at Pickup:</span>
-                    <span id="summaryBalance">$0.00</span>
-                </div>
+            <div class="payment-details hidden" id="paymentDetails">
+              <div id="paymentDetailsContent"></div>
             </div>
 
-            <!-- ========== DEPOSIT INFORMATION ========== -->
-            <div id="depositPickupInfo" class="deposit-alert hidden">
-                <strong>🔒 50% Deposit to Secure Your Pickup Appointment</strong>
-                <p>A 50% deposit is required to confirm and secure your pickup appointment. The remaining balance is due at the time of pickup.</p>
-                <div class="deposit-row">
-                    <div class="deposit-info">
-                        <div class="deposit-info-label">Deposit Amount:</div>
-                        <div class="deposit-amount-display" id="depositDisplayAmount">$0.00</div>
-                    </div>
-                    <div class="deposit-info">
-                        <div class="deposit-info-label">Balance Due at Pickup:</div>
-                        <div class="deposit-amount-display" id="balanceDisplayAmount">$0.00</div>
-                    </div>
-                </div>
+            <div class="payment-note">
+              <strong>ℹ️ Payment Instructions:</strong> A 50% deposit is required to secure your
+              pickup appointment. Your confirmation email will include payment details. The
+              remaining 50% balance is due at pickup.
             </div>
+          </div>
+        </div>
 
-            <!-- ========== STEP 4: PAYMENT METHOD ========== -->
-            <div class="step-container">
-                <div class="section-title">💵 Step 4: Select Payment Method</div>
-                
-                <div class="form-section">
-                    <div class="payment-options">
-                        <label class="payment-option">
-                            <input type="radio" id="paymentCash" name="payment_method" value="Cash" required onchange="updatePaymentDetails()">
-                            <div class="payment-label">
-                                <strong>💵 Cash</strong>
-                                <small>Pay deposit now, balance at pickup</small>
-                            </div>
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" id="paymentCashApp" name="payment_method" value="Cash App" onchange="updatePaymentDetails()">
-                            <div class="payment-label">
-                                <strong>💸 Cash App</strong>
-                                <small>$DanaBlueMoonHaven</small>
-                            </div>
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" id="paymentVenmo" name="payment_method" value="Venmo" onchange="updatePaymentDetails()">
-                            <div class="payment-label">
-                                <strong>📱 Venmo</strong>
-                                <small>@BlueMoonHaven</small>
-                            </div>
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" id="paymentPayPal" name="payment_method" value="PayPal" onchange="updatePaymentDetails()">
-                            <div class="payment-label">
-                                <strong>🅿️ PayPal</strong>
-                                <small>@BlueMoonHaven</small>
-                            </div>
-                        </label>
-                        <label class="payment-option">
-                            <input type="radio" id="paymentZelle" name="payment_method" value="Zelle" onchange="updatePaymentDetails()">
-                            <div class="payment-label">
-                                <strong>🏦 Zelle</strong>
-                                <small>805-709-4686</small>
-                            </div>
-                        </label>
-                    </div>
+        <!-- ========== SUBMIT ========== -->
+        <div class="submit-container">
+          <button type="submit" class="btn btn-submit">✅ Submit Order & Secure Appointment</button>
+          <button type="reset" class="btn btn-reset" onclick="resetFormComplete()">
+            🔄 Clear Form
+          </button>
+        </div>
+      </form>
 
-                    <div class="payment-details hidden" id="paymentDetails">
-                        <div id="paymentDetailsContent"></div>
-                    </div>
-
-                    <div class="payment-note">
-                        <strong>ℹ️ Payment Instructions:</strong> A 50% deposit is required to secure your pickup appointment. Your confirmation email will include payment details. The remaining 50% balance is due at pickup.
-                    </div>
-                </div>
-            </div>
-
-            <!-- ========== SUBMIT ========== -->
-            <div class="submit-container">
-                <button type="submit" class="btn btn-submit">✅ Submit Order & Secure Appointment</button>
-                <button type="reset" class="btn btn-reset" onclick="resetFormComplete()">🔄 Clear Form</button>
-            </div>
-        </form>
-
-        <!-- Alerts -->
-        <div class="alert alert-success" id="successAlert"></div>
-        <div class="alert alert-error" id="errorAlert"></div>
+      <!-- Alerts -->
+      <div class="alert alert-success" id="successAlert"></div>
+      <div class="alert alert-error" id="errorAlert"></div>
     </div>
 
     <script src="cart.js"></script>
@@ -296,36 +380,36 @@
       // Scroll to top smoothly
       function scrollToTop(event) {
         event.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
       // Update cart badge count (call this from cart.js)
       function updateCartBadge() {
-        const badge = document.getElementById('cartBadge');
+        const badge = document.getElementById("cartBadge");
         const cart = globalThis.cart || [];
         if (badge) {
           const itemCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
           badge.textContent = itemCount;
           if (itemCount > 0) {
-            badge.style.display = 'flex';
-            badge.style.visibility = 'visible';
+            badge.style.display = "flex";
+            badge.style.visibility = "visible";
           } else {
-            badge.style.display = 'none';
+            badge.style.display = "none";
           }
         }
       }
 
       // Initialize on page load
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener("DOMContentLoaded", function () {
         // Force load cart from localStorage
-        if (typeof loadCart === 'function') {
+        if (typeof loadCart === "function") {
           loadCart();
         }
-        if (typeof updateCart === 'function') {
+        if (typeof updateCart === "function") {
           updateCart();
         }
         updateCartBadge();
       });
     </script>
-</body>
+  </body>
 </html>

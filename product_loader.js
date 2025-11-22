@@ -53,8 +53,8 @@ function generateCategoryTabs() {
 
   // Get unique categories in desired order
   const categoryOrder = ["Cookie", "Brownie", "Cake", "Pastry", "Pie", "Bread", "Muffin", "Candy"];
-  const allCategories = new Set(menuItems.map(item => item.category));
-  const categories = categoryOrder.filter(cat => allCategories.has(cat));
+  const allCategories = new Set(menuItems.map((item) => item.category));
+  const categories = categoryOrder.filter((cat) => allCategories.has(cat));
 
   for (const cat of categories) {
     const option = document.createElement("option");
@@ -130,7 +130,9 @@ function displayProducts(products) {
 
   // Sort categories with Cookie first
   const categoryOrder = ["Cookie"];
-  const otherCategories = Object.keys(productsByCategory).filter(cat => cat !== "Cookie").sort((a, b) => a.localeCompare(b));
+  const otherCategories = Object.keys(productsByCategory)
+    .filter((cat) => cat !== "Cookie")
+    .sort((a, b) => a.localeCompare(b));
   const sortedCategories = [...categoryOrder, ...otherCategories];
 
   let globalIndex = 0;
@@ -186,7 +188,7 @@ function createCookieSections(items, startIndex) {
   const subcategories = ["simple", "fancy", "complex"];
   let index = startIndex;
   for (const sub of subcategories) {
-    const subItems = items.filter(item => item.subcategory === sub);
+    const subItems = items.filter((item) => item.subcategory === sub);
     if (subItems.length > 0) {
       const subTitle = document.createElement("h3");
       subTitle.className = "subcategory-title";
@@ -219,16 +221,16 @@ function createProductCard(item, index) {
   if (item.image) {
     // Use <picture> for WebP support with JPG fallback
     const picture = document.createElement("picture");
-    const webpSrc = item.image.replace('.jpg', '.webp').replace('.png', '.webp');
+    const webpSrc = item.image.replace(".jpg", ".webp").replace(".png", ".webp");
     const source = document.createElement("source");
     source.srcset = webpSrc;
     source.type = "image/webp";
     picture.appendChild(source);
-    
+
     const img = document.createElement("img");
     img.src = item.image;
     img.alt = item.name || "Product Image";
-    img.loading = 'lazy';
+    img.loading = "lazy";
     picture.appendChild(img);
     imgWrap.appendChild(picture);
   } else {
@@ -273,7 +275,7 @@ function getDefaultPrice(item) {
   if (typeof item.basePrice === "number") return item.basePrice;
   if (item.sizes && item.sizes.length > 0 && item.sizePrice) {
     const firstSize = item.sizes[0];
-    return item.sizePrice[firstSize.replaceAll(' ', '_')] || 0;
+    return item.sizePrice[firstSize.replaceAll(" ", "_")] || 0;
   }
   return 0;
 }
@@ -285,7 +287,7 @@ function updatePrice(index) {
   const sizeSelect = card.querySelector(".size-select");
   const priceDisplay = card.querySelector(".product-price");
 
-  const selectedSize = sizeSelect.value.replaceAll(' ', '_');
+  const selectedSize = sizeSelect.value.replaceAll(" ", "_");
   const price = item.sizePrice[selectedSize] || item.basePrice;
   priceDisplay.textContent = `from $${price.toFixed(2)}`;
 }
@@ -296,18 +298,18 @@ function filterAndDisplay() {
   // Category filter
   const category = getCurrentCategory();
   if (category !== "all") {
-    filtered = filtered.filter(item => item.category === category);
+    filtered = filtered.filter((item) => item.category === category);
   }
 
   // Search filter
   const searchQuery = document.getElementById("productSearch").value.toLowerCase();
   if (searchQuery) {
-    filtered = filtered.filter(item => item.name.toLowerCase().includes(searchQuery));
+    filtered = filtered.filter((item) => item.name.toLowerCase().includes(searchQuery));
   }
 
   // Dietary filters (updated to use button states and OR logic)
   if (gfFilterActive || sfFilterActive) {
-    filtered = filtered.filter(item => {
+    filtered = filtered.filter((item) => {
       if (gfFilterActive && item.canGlutenfree) return true;
       if (sfFilterActive && item.canSugarfree) return true;
       return false; // Only include if at least one filter matches
@@ -335,25 +337,25 @@ function filterAndDisplay() {
 function openProductModal(index) {
   globalThis.currentModalIndex = index;
   const item = menuItems[index];
-  const modalContent = document.getElementById('modalContent');
+  const modalContent = document.getElementById("modalContent");
   modalContent.innerHTML = createModalContent(item, index);
-  
+
   // Lazy load modal image
-  const modalImg = modalContent.querySelector('.product-image img');
+  const modalImg = modalContent.querySelector(".product-image img");
   if (modalImg?.dataset?.src) {
     modalImg.src = modalImg.dataset.src;
   }
-  
-  const modal = document.getElementById('productModal');
-  modal.addEventListener('click', handleBackdropClick);
+
+  const modal = document.getElementById("productModal");
+  modal.addEventListener("click", handleBackdropClick);
   modal.showModal();
 }
 
 function closeProductModal() {
-  const modal = document.getElementById('productModal');
-  modal.removeEventListener('click', handleBackdropClick);
+  const modal = document.getElementById("productModal");
+  modal.removeEventListener("click", handleBackdropClick);
   modal.close();
-  document.getElementById('modalContent').innerHTML = '';
+  document.getElementById("modalContent").innerHTML = "";
 }
 
 function handleBackdropClick(e) {
@@ -367,23 +369,23 @@ function stopModalPropagation(e) {
 function createModalContent(item, index) {
   const defaultPrice = getDefaultPrice(item);
 
-  let html = '';
+  let html = "";
 
   // Image
   html += '<div class="product-image">';
   if (item.image) {
-    const webpSrc = item.image.replace('.jpg', '.webp').replace('.png', '.webp');
-    html += `<picture><source srcset="${webpSrc}" type="image/webp"><img alt="${item.name || 'Product Image'}" data-src="${item.image}"></picture>`;
+    const webpSrc = item.image.replace(".jpg", ".webp").replace(".png", ".webp");
+    html += `<picture><source srcset="${webpSrc}" type="image/webp"><img alt="${item.name || "Product Image"}" data-src="${item.image}"></picture>`;
   } else {
     html += '<div class="image-placeholder">Image Coming Soon</div>';
   }
-  html += '</div>';
+  html += "</div>";
 
   // Header
   html += '<div class="product-header">';
   html += `<div class="product-name">${item.name}</div>`;
   html += `<div class="product-price">$${defaultPrice.toFixed(2)}</div>`;
-  html += '</div>';
+  html += "</div>";
 
   // Badges
   html += '<div class="dietary-badges">';
@@ -393,7 +395,7 @@ function createModalContent(item, index) {
   if (item.canSugarfree) {
     html += '<span class="badge sugar-free">Can be Sugar Free</span>';
   }
-  html += '</div>';
+  html += "</div>";
 
   // Form
   html += '<div class="product-form">';
@@ -405,62 +407,66 @@ function createModalContent(item, index) {
   for (const size of item.sizes) {
     html += `<option value="${size}">${size}</option>`;
   }
-  html += '</select>';
-  html += '</div>';
+  html += "</select>";
+  html += "</div>";
 
   // Flavor select (optional)
   if (item.flavors && item.flavors.length > 0) {
     html += '<div class="form-group">';
     html += '<label for="modal-flavor">Flavor:</label>';
-    html += '<select id="modal-flavor" class="flavor-select" onchange="updateDietaryOptionsInModal()">';
+    html +=
+      '<select id="modal-flavor" class="flavor-select" onchange="updateDietaryOptionsInModal()">';
     for (const flavor of item.flavors) {
       html += `<option value="${flavor}">${flavor}</option>`;
     }
-    html += '</select>';
-    html += '</div>';
+    html += "</select>";
+    html += "</div>";
   }
 
   // Flavor notes (optional)
   if (item.flavorNotes) {
     html += '<div class="form-group">';
     html += '<label for="modal-notes">Flavor Notes:</label>';
-    html += '<input type="text" id="modal-notes" class="flavor-notes" placeholder="Optional flavor preferences">';
-    html += '</div>';
+    html +=
+      '<input type="text" id="modal-notes" class="flavor-notes" placeholder="Optional flavor preferences">';
+    html += "</div>";
   }
 
   // Quantity
   html += '<div class="form-group">';
   html += '<label for="modal-qty">Quantity:</label>';
   html += '<input type="number" id="modal-qty" class="quantity-input" min="1" value="1">';
-  html += '</div>';
+  html += "</div>";
 
   // Dietary options
   if (item.canGlutenfree || item.canSugarfree) {
     html += '<div class="form-group dietary-options">';
-    html += '<label>Special Options:</label>';
+    html += "<label>Special Options:</label>";
     if (item.canGlutenfree) {
-      html += '<label class="checkbox-label"><input type="checkbox" id="modal-gf" class="dietary-checkbox"> Gluten Free</label>';
+      html +=
+        '<label class="checkbox-label"><input type="checkbox" id="modal-gf" class="dietary-checkbox"> Gluten Free</label>';
     }
     if (item.canSugarfree) {
-      html += '<label class="checkbox-label"><input type="checkbox" id="modal-sf" class="dietary-checkbox"> Sugar Free</label>';
+      html +=
+        '<label class="checkbox-label"><input type="checkbox" id="modal-sf" class="dietary-checkbox"> Sugar Free</label>';
     }
-    html += '</div>';
+    html += "</div>";
   }
 
   // Add to Cart button
   html += `<button class="add-to-cart-btn" onclick="addToCart(${index})">Add to Cart</button>`;
 
-  html += '</div>';
+  html += "</div>";
 
   return html;
 }
 
 function updatePriceInModal() {
-  const sizeSelect = document.getElementById('modal-size');
-  const priceDisplay = document.querySelector('#modalContent .product-price');
+  const sizeSelect = document.getElementById("modal-size");
+  const priceDisplay = document.querySelector("#modalContent .product-price");
   if (!sizeSelect || !priceDisplay) return;
 
-  const selectedSize = sizeSelect.value.replaceAll(' ', '_');
+  const selectedSize = sizeSelect.value.replaceAll(" ", "_");
   const currentItem = menuItems[globalThis.currentModalIndex];
   const price = currentItem.sizePrice[selectedSize] || currentItem.basePrice;
   priceDisplay.textContent = `$${price.toFixed(2)}`;

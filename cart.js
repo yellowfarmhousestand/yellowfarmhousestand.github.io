@@ -2,17 +2,17 @@
 let cart = [];
 
 // Expose cart array to global scope
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   window.cart = cart;
 }
 
 function saveCart() {
   window.cart = cart;
-  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 function loadCart() {
-  const saved = localStorage.getItem('cart');
+  const saved = localStorage.getItem("cart");
   if (saved) {
     cart = JSON.parse(saved);
     window.cart = cart;
@@ -21,32 +21,32 @@ function loadCart() {
 
 function addToCart(index) {
   // Ensure menuItems exists (loaded from product_loader.js)
-  if (typeof menuItems === 'undefined' || !menuItems || !menuItems[index]) {
-    showError('Product information not available. Please refresh the page.');
+  if (typeof menuItems === "undefined" || !menuItems || !menuItems[index]) {
+    showError("Product information not available. Please refresh the page.");
     return;
   }
-  
+
   const item = menuItems[index];
   let size, flavor, qty, glutenFree, sugarFree;
 
-  const modal = document.getElementById('productModal');
+  const modal = document.getElementById("productModal");
   const modalOpen = modal && modal.open;
 
   if (modalOpen) {
-    size = document.getElementById('modal-size').value;
-    flavor = document.getElementById('modal-flavor')?.value || 'Standard';
-    qty = Number.parseInt(document.getElementById('modal-qty').value) || 1;
-    glutenFree = document.getElementById('modal-gf')?.checked || false;
-    sugarFree = document.getElementById('modal-sf')?.checked || false;
+    size = document.getElementById("modal-size").value;
+    flavor = document.getElementById("modal-flavor")?.value || "Standard";
+    qty = Number.parseInt(document.getElementById("modal-qty").value) || 1;
+    glutenFree = document.getElementById("modal-gf")?.checked || false;
+    sugarFree = document.getElementById("modal-sf")?.checked || false;
   } else {
     size = document.getElementById(`size-${index}`).value;
-    flavor = document.getElementById(`flavor-${index}`)?.value || 'Standard';
+    flavor = document.getElementById(`flavor-${index}`)?.value || "Standard";
     qty = Number.parseInt(document.getElementById(`qty-${index}`).value) || 1;
     glutenFree = document.getElementById(`gf-${index}`)?.checked || false;
     sugarFree = document.getElementById(`sf-${index}`)?.checked || false;
   }
 
-  let price = item.sizePrice[size.replaceAll(' ', '_')];
+  let price = item.sizePrice[size.replaceAll(" ", "_")];
   let totalPrice = price * qty;
 
   const cartItem = {
@@ -60,14 +60,14 @@ function addToCart(index) {
     canShip: item.canShip || false,
     weight: item.weight || 0,
     hasDeposit: item.hasDeposit || false,
-    depositAmount: item.depositAmount || 0
+    depositAmount: item.depositAmount || 0,
   };
 
   cart.push(cartItem);
   updateCart();
   saveCart();
   showSuccess(`Added ${qty}x ${item.name} to order!`);
-  
+
   if (modalOpen) {
     closeProductModal();
   } else {
@@ -76,17 +76,19 @@ function addToCart(index) {
 }
 
 function updateCart() {
-  const orderItemsDiv = document.getElementById('orderItems');
-  
+  const orderItemsDiv = document.getElementById("orderItems");
+
   if (cart.length === 0) {
     orderItemsDiv.innerHTML = '<div class="empty-items">No items added yet</div>';
   } else {
-    orderItemsDiv.innerHTML = cart.map(item => `
+    orderItemsDiv.innerHTML = cart
+      .map(
+        (item) => `
       <div class="order-item">
         <div class="order-item-details">
           <div>
             <div class="order-item-name">${item.name}</div>
-            <div class="order-item-specs">${item.quantity}x - ${item.size}${item.flavor === 'Standard' ? '' : ` - ${item.flavor}`}${item.glutenFree ? ' [GF]' : ''}${item.sugarFree ? ' [SF]' : ''}</div>
+            <div class="order-item-specs">${item.quantity}x - ${item.size}${item.flavor === "Standard" ? "" : ` - ${item.flavor}`}${item.glutenFree ? " [GF]" : ""}${item.sugarFree ? " [SF]" : ""}</div>
           </div>
           <div class="order-item-price">$${item.price.toFixed(2)}</div>
         </div>
@@ -94,11 +96,13 @@ function updateCart() {
           <button type="button" class="btn btn-remove btn-small" onclick="removeFromCart(${cart.indexOf(item)})">Remove</button>
         </div>
       </div>
-    `).join('');
+    `
+      )
+      .join("");
   }
 
   // Update navigation cart badge
-  if (typeof updateCartBadge === 'function') {
+  if (typeof updateCartBadge === "function") {
     updateCartBadge();
   }
 
@@ -109,7 +113,7 @@ function updateCart() {
   // Handle deposit info for items requiring deposit
   const depositInfo = document.getElementById("depositPickupInfo");
   if (depositInfo) {
-    const hasDeposit = cart.some(item => item.hasDeposit);
+    const hasDeposit = cart.some((item) => item.hasDeposit);
     depositInfo.style.display = hasDeposit ? "block" : "none";
   }
 }
@@ -133,8 +137,7 @@ function checkShippingAvailability() {
 
   if (hasNonShippable) {
     shippingNotice.style.display = "block";
-    shippingNotice.innerHTML =
-      "⚠️ Some items in your cart require local pickup only.";
+    shippingNotice.innerHTML = "⚠️ Some items in your cart require local pickup only.";
   } else {
     shippingNotice.style.display = "none";
   }
@@ -154,9 +157,7 @@ const paymentInfo = {
 };
 
 function updatePaymentDetails() {
-  const selectedMethod = document.querySelector(
-    'input[name="payment_method"]:checked'
-  )?.value;
+  const selectedMethod = document.querySelector('input[name="payment_method"]:checked')?.value;
   const detailsDiv = document.getElementById("paymentDetails");
   const contentDiv = document.getElementById("paymentDetailsContent");
 
@@ -171,18 +172,18 @@ function updatePaymentDetails() {
 // ========== FULFILLMENT METHODS ==========
 function handleFulfillmentChange() {
   const fulfillment = document.querySelector('input[name="fulfillment_method"]:checked').value;
-  const pickupSection = document.getElementById('pickupSection');
-  const shippingSection = document.getElementById('shippingSection');
-  const pickupDateInput = document.getElementById('pickupDate');
-  const pickupTimeInput = document.getElementById('pickupTime');
-  const shippingInputs = document.querySelectorAll('#shippingSection input');
-  const depositInfo = document.getElementById('depositPickupInfo');
+  const pickupSection = document.getElementById("pickupSection");
+  const shippingSection = document.getElementById("shippingSection");
+  const pickupDateInput = document.getElementById("pickupDate");
+  const pickupTimeInput = document.getElementById("pickupTime");
+  const shippingInputs = document.querySelectorAll("#shippingSection input");
+  const depositInfo = document.getElementById("depositPickupInfo");
 
-  if (fulfillment === 'Pickup') {
-    pickupSection.classList.add('visible');
-    pickupSection.classList.remove('hidden-section');
-    shippingSection.classList.remove('visible');
-    shippingSection.classList.add('hidden-section');
+  if (fulfillment === "Pickup") {
+    pickupSection.classList.add("visible");
+    pickupSection.classList.remove("hidden-section");
+    shippingSection.classList.remove("visible");
+    shippingSection.classList.add("hidden-section");
 
     pickupDateInput.required = true;
     pickupTimeInput.required = true;
@@ -190,13 +191,13 @@ function handleFulfillmentChange() {
       input.required = false;
     }
 
-    document.getElementById('summaryShippingRow').style.display = 'none';
-    depositInfo.style.display = 'block';
+    document.getElementById("summaryShippingRow").style.display = "none";
+    depositInfo.style.display = "block";
   } else {
-    pickupSection.classList.remove('visible');
-    pickupSection.classList.add('hidden-section');
-    shippingSection.classList.add('visible');
-    shippingSection.classList.remove('hidden-section');
+    pickupSection.classList.remove("visible");
+    pickupSection.classList.add("hidden-section");
+    shippingSection.classList.add("visible");
+    shippingSection.classList.remove("hidden-section");
 
     pickupDateInput.required = false;
     pickupTimeInput.required = false;
@@ -204,15 +205,15 @@ function handleFulfillmentChange() {
       input.required = true;
     }
 
-    document.getElementById('summaryShippingRow').style.display = 'flex';
-    depositInfo.style.display = 'none';
+    document.getElementById("summaryShippingRow").style.display = "flex";
+    depositInfo.style.display = "none";
   }
   calculateTotals();
 }
 
 // ========== SHIPPING CALCULATION ==========
 function calculateShipping() {
-  const zipCode = document.getElementById('shippingZip').value;
+  const zipCode = document.getElementById("shippingZip").value;
   let shippingCost = 0;
 
   if (zipCode) {
@@ -230,7 +231,7 @@ function calculateShipping() {
     }
   }
 
-  document.getElementById('shippingCost').textContent = `$${shippingCost.toFixed(2)}`;
+  document.getElementById("shippingCost").textContent = `$${shippingCost.toFixed(2)}`;
   calculateTotals();
 }
 
@@ -240,63 +241,71 @@ function calculateTotals() {
 
   let shippingCost = 0;
   const fulfillment = document.querySelector('input[name="fulfillment_method"]:checked').value;
-  if (fulfillment === 'Shipping') {
-    const shippingCostText = document.getElementById('shippingCost').textContent;
-    shippingCost = Number.parseFloat(shippingCostText.replace('$', '')) || 0;
+  if (fulfillment === "Shipping") {
+    const shippingCostText = document.getElementById("shippingCost").textContent;
+    shippingCost = Number.parseFloat(shippingCostText.replace("$", "")) || 0;
   }
 
   const total = subtotal + shippingCost;
   const baseDeposit = total * 0.5;
-  const additionalDeposit = cart.reduce((sum, item) => sum + (item.hasDeposit ? item.depositAmount : 0), 0);
+  const additionalDeposit = cart.reduce(
+    (sum, item) => sum + (item.hasDeposit ? item.depositAmount : 0),
+    0
+  );
   const deposit = baseDeposit + additionalDeposit;
   const balance = total - deposit;
 
-  document.getElementById('summarySubtotal').textContent = `$${subtotal.toFixed(2)}`;
-  document.getElementById('summaryShipping').textContent = `$${shippingCost.toFixed(2)}`;
-  document.getElementById('summaryTotal').textContent = `$${total.toFixed(2)}`;
-  document.getElementById('summaryDeposit').textContent = `$${deposit.toFixed(2)}`;
-  document.getElementById('summaryBalance').textContent = `$${balance.toFixed(2)}`;
+  document.getElementById("summarySubtotal").textContent = `$${subtotal.toFixed(2)}`;
+  document.getElementById("summaryShipping").textContent = `$${shippingCost.toFixed(2)}`;
+  document.getElementById("summaryTotal").textContent = `$${total.toFixed(2)}`;
+  document.getElementById("summaryDeposit").textContent = `$${deposit.toFixed(2)}`;
+  document.getElementById("summaryBalance").textContent = `$${balance.toFixed(2)}`;
 
   // Update deposit display
-  document.getElementById('depositDisplayAmount').textContent = `$${deposit.toFixed(2)}`;
-  document.getElementById('balanceDisplayAmount').textContent = `$${balance.toFixed(2)}`;
+  document.getElementById("depositDisplayAmount").textContent = `$${deposit.toFixed(2)}`;
+  document.getElementById("balanceDisplayAmount").textContent = `$${balance.toFixed(2)}`;
 
-  const orderDetails = cart.map(item => 
-    `${item.quantity}x ${item.name} - ${item.size}${item.flavor === 'Standard' ? '' : ' - ' + item.flavor}${item.glutenFree ? ' [GF]' : ''}${item.sugarFree ? ' [SF]' : ''}: $${item.price.toFixed(2)}`
-  ).join('\n');
-  document.getElementById('orderSummary').value = orderDetails + `\n\nTotal: $${total.toFixed(2)}\nDeposit Due: $${deposit.toFixed(2)}\nBalance Due at Pickup: $${balance.toFixed(2)}`;
+  const orderDetails = cart
+    .map(
+      (item) =>
+        `${item.quantity}x ${item.name} - ${item.size}${item.flavor === "Standard" ? "" : " - " + item.flavor}${item.glutenFree ? " [GF]" : ""}${item.sugarFree ? " [SF]" : ""}: $${item.price.toFixed(2)}`
+    )
+    .join("\n");
+  document.getElementById("orderSummary").value =
+    orderDetails +
+    `\n\nTotal: $${total.toFixed(2)}\nDeposit Due: $${deposit.toFixed(2)}\nBalance Due at Pickup: $${balance.toFixed(2)}`;
 }
 
 // ========== FORM SUBMISSION ==========
-document.getElementById('orderForm').addEventListener('submit', function(e) {
+document.getElementById("orderForm").addEventListener("submit", function (e) {
   if (cart.length === 0) {
     e.preventDefault();
-    showError('Please add at least one item to your order.');
+    showError("Please add at least one item to your order.");
     return;
   }
 
-  const name = document.getElementById('customerName').value.trim();
-  const phone = document.getElementById('customerPhone').value.trim();
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
   if (!name || !phone) {
     e.preventDefault();
-    showError('Please fill in your name and phone number.');
+    showError("Please fill in your name and phone number.");
     return;
   }
 
   const paymentMethod = document.querySelector('input[name="payment_method"]:checked');
   if (!paymentMethod) {
     e.preventDefault();
-    showError('Please select a payment method.');
+    showError("Please select a payment method.");
     return;
   }
 
   const fulfillment = document.querySelector('input[name="fulfillment_method"]:checked').value;
-  if (fulfillment === 'Pickup') {
-    const pickupDate = document.getElementById('pickupDate').value;
-    const pickupTime = document.getElementById('pickupTime').value;
+  if (fulfillment === "Pickup") {
+    const pickupDate = document.getElementById("pickupDate").value;
+    const pickupTime = document.getElementById("pickupTime").value;
     if (!pickupDate || !pickupTime) {
       e.preventDefault();
-      showError('Please select a pickup date and time.');
+      showError("Please select a pickup date and time.");
       return;
     }
   }
@@ -309,10 +318,10 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
 
 // ========== BUILD ORDER SUMMARY ==========
 function buildOrderSummary() {
-  const name = document.getElementById('customerName').value.trim();
-  const email = document.getElementById('customerEmail').value.trim();
-  const phone = document.getElementById('customerPhone').value.trim();
-  const notes = document.getElementById('specialInstructions').value.trim();
+  const name = document.getElementById("customerName").value.trim();
+  const email = document.getElementById("customerEmail").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const notes = document.getElementById("specialInstructions").value.trim();
   const fulfillment = document.querySelector('input[name="fulfillment_method"]:checked').value;
   const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
 
@@ -326,23 +335,23 @@ function buildOrderSummary() {
   summary += `=== ORDER DETAILS ===\n`;
   for (const item of cart) {
     summary += `${item.quantity}x ${item.name} - ${item.size}`;
-    if (item.flavor && item.flavor !== 'Standard') summary += ` - ${item.flavor}`;
-    if (item.glutenFree) summary += ' [GF]';
-    if (item.sugarFree) summary += ' [SF]';
+    if (item.flavor && item.flavor !== "Standard") summary += ` - ${item.flavor}`;
+    if (item.glutenFree) summary += " [GF]";
+    if (item.sugarFree) summary += " [SF]";
     summary += `: $${item.price.toFixed(2)}\n`;
   }
   summary += `\n`;
 
   summary += `=== FULFILLMENT ===\n`;
-  if (fulfillment === 'Pickup') {
-    const pickupDate = document.getElementById('pickupDate').value;
-    const pickupTime = document.getElementById('pickupTime').value;
+  if (fulfillment === "Pickup") {
+    const pickupDate = document.getElementById("pickupDate").value;
+    const pickupTime = document.getElementById("pickupTime").value;
     summary += `Pickup: ${pickupDate} at ${pickupTime}\n`;
   } else {
-    const shippingAddress = document.getElementById('shippingAddress').value.trim();
-    const shippingCity = document.getElementById('shippingCity').value.trim();
-    const shippingState = document.getElementById('shippingState').value.trim();
-    const shippingZip = document.getElementById('shippingZip').value.trim();
+    const shippingAddress = document.getElementById("shippingAddress").value.trim();
+    const shippingCity = document.getElementById("shippingCity").value.trim();
+    const shippingState = document.getElementById("shippingState").value.trim();
+    const shippingZip = document.getElementById("shippingZip").value.trim();
     summary += `Shipping to: ${shippingAddress}, ${shippingCity}, ${shippingState} ${shippingZip}\n`;
   }
   summary += `\n`;
@@ -354,13 +363,16 @@ function buildOrderSummary() {
   // Calculate totals
   let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
   let shippingCost = 0;
-  if (fulfillment === 'Shipping') {
-    const shippingCostText = document.getElementById('shippingCost').textContent;
-    shippingCost = Number.parseFloat(shippingCostText.replace('$', '')) || 0;
+  if (fulfillment === "Shipping") {
+    const shippingCostText = document.getElementById("shippingCost").textContent;
+    shippingCost = Number.parseFloat(shippingCostText.replace("$", "")) || 0;
   }
   const total = subtotal + shippingCost;
   const baseDeposit = total * 0.5;
-  const additionalDeposit = cart.reduce((sum, item) => sum + (item.hasDeposit ? item.depositAmount : 0), 0);
+  const additionalDeposit = cart.reduce(
+    (sum, item) => sum + (item.hasDeposit ? item.depositAmount : 0),
+    0
+  );
   const deposit = baseDeposit + additionalDeposit;
   const balance = total - deposit;
 
@@ -369,47 +381,47 @@ function buildOrderSummary() {
   if (shippingCost > 0) summary += `Shipping: $${shippingCost.toFixed(2)}\n`;
   summary += `Total: $${total.toFixed(2)}\n`;
   summary += `Deposit Due: $${deposit.toFixed(2)}\n`;
-  summary += `Balance Due at ${fulfillment === 'Pickup' ? 'Pickup' : 'Delivery'}: $${balance.toFixed(2)}\n`;
+  summary += `Balance Due at ${fulfillment === "Pickup" ? "Pickup" : "Delivery"}: $${balance.toFixed(2)}\n`;
 
-  document.getElementById('orderSummary').value = summary;
+  document.getElementById("orderSummary").value = summary;
 }
 
 // ========== RESET FORM ==========
 function resetFormComplete() {
-  document.getElementById('orderForm').reset();
+  document.getElementById("orderForm").reset();
   cart = [];
   updateCart();
-  document.getElementById('pickupDate').value = '';
-  document.getElementById('pickupTime').value = '';
+  document.getElementById("pickupDate").value = "";
+  document.getElementById("pickupTime").value = "";
 
-  document.getElementById('fulfillmentPickup').checked = true;
+  document.getElementById("fulfillmentPickup").checked = true;
   handleFulfillmentChange();
-  document.getElementById('paymentDetails').style.display = 'none';
+  document.getElementById("paymentDetails").style.display = "none";
 }
 
 // ========== ALERTS ==========
 function showError(message) {
-  const alert = document.getElementById('errorAlert');
-  alert.textContent = '❌ ' + message;
-  alert.classList.add('visible');
-  setTimeout(() => alert.classList.remove('visible'), 5000);
+  const alert = document.getElementById("errorAlert");
+  alert.textContent = "❌ " + message;
+  alert.classList.add("visible");
+  setTimeout(() => alert.classList.remove("visible"), 5000);
 }
 
 function showSuccess(message) {
-  const alert = document.getElementById('successAlert');
-  alert.textContent = '✅ ' + message;
-  alert.classList.add('visible');
-  setTimeout(() => alert.classList.remove('visible'), 3000);
+  const alert = document.getElementById("successAlert");
+  alert.textContent = "✅ " + message;
+  alert.classList.add("visible");
+  setTimeout(() => alert.classList.remove("visible"), 3000);
 }
 
 function proceedToCart() {
   if (cart.length === 0) {
-    document.getElementById('emptyCartAlert').classList.remove('hidden');
-    document.getElementById('readyToProceedAlert').classList.add('hidden');
+    document.getElementById("emptyCartAlert").classList.remove("hidden");
+    document.getElementById("readyToProceedAlert").classList.add("hidden");
   } else {
-    document.getElementById('emptyCartAlert').classList.add('hidden');
-    document.getElementById('readyToProceedAlert').classList.add('hidden');
-    globalThis.location.href = 'cart.html';
+    document.getElementById("emptyCartAlert").classList.add("hidden");
+    document.getElementById("readyToProceedAlert").classList.add("hidden");
+    globalThis.location.href = "cart.html";
   }
 }
 
@@ -425,7 +437,7 @@ window.updatePaymentDetails = updatePaymentDetails;
 window.handleFulfillmentChange = handleFulfillmentChange;
 window.calculateShipping = calculateShipping;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   loadCart();
   updateCart();
   checkShippingAvailability();
@@ -438,10 +450,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const maxDate = new Date(today);
   maxDate.setDate(today.getDate() + 14);
 
-  const pickupDateInput = document.getElementById('pickupDate');
+  const pickupDateInput = document.getElementById("pickupDate");
   if (pickupDateInput) {
-    pickupDateInput.min = minDate.toISOString().split('T')[0];
-    pickupDateInput.max = maxDate.toISOString().split('T')[0];
+    pickupDateInput.min = minDate.toISOString().split("T")[0];
+    pickupDateInput.max = maxDate.toISOString().split("T")[0];
     // Set default to min date
     pickupDateInput.value = pickupDateInput.min;
   }
