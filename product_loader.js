@@ -189,13 +189,13 @@ function createProductCard(item, index) {
   if (item.canGlutenfree) {
     const gfBadge = document.createElement("span");
     gfBadge.className = "badge gluten-free";
-    gfBadge.textContent = "Gluten Free";
+    gfBadge.textContent = "Can be Gluten Free";
     badges.appendChild(gfBadge);
   }
   if (item.canSugarfree) {
     const sfBadge = document.createElement("span");
     sfBadge.className = "badge sugar-free";
-    sfBadge.textContent = "Sugar Free";
+    sfBadge.textContent = "Can be Sugar Free";
     badges.appendChild(sfBadge);
   }
   card.appendChild(badges);
@@ -273,6 +273,41 @@ function createProductCard(item, index) {
   qtyGroup.appendChild(qtyLabel);
   qtyGroup.appendChild(qtyInput);
   form.appendChild(qtyGroup);
+
+  // Dietary options
+  if (item.canGlutenfree || item.canSugarfree) {
+    const dietaryGroup = document.createElement("div");
+    dietaryGroup.className = "form-group dietary-options";
+    const dietaryLabel = document.createElement("label");
+    dietaryLabel.textContent = "Special Options:";
+    dietaryGroup.appendChild(dietaryLabel);
+
+    if (item.canGlutenfree) {
+      const gfLabel = document.createElement("label");
+      gfLabel.className = "checkbox-label";
+      const gfCheckbox = document.createElement("input");
+      gfCheckbox.type = "checkbox";
+      gfCheckbox.id = `gf-${index}`;
+      gfCheckbox.className = "dietary-checkbox";
+      gfLabel.appendChild(gfCheckbox);
+      gfLabel.appendChild(document.createTextNode(" Gluten Free"));
+      dietaryGroup.appendChild(gfLabel);
+    }
+
+    if (item.canSugarfree) {
+      const sfLabel = document.createElement("label");
+      sfLabel.className = "checkbox-label";
+      const sfCheckbox = document.createElement("input");
+      sfCheckbox.type = "checkbox";
+      sfCheckbox.id = `sf-${index}`;
+      sfCheckbox.className = "dietary-checkbox";
+      sfLabel.appendChild(sfCheckbox);
+      sfLabel.appendChild(document.createTextNode(" Sugar Free"));
+      dietaryGroup.appendChild(sfLabel);
+    }
+
+    form.appendChild(dietaryGroup);
+  }
 
   const addBtn = document.createElement("button");
   addBtn.className = "add-to-cart-btn";
